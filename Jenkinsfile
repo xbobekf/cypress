@@ -2,7 +2,7 @@ pipeline {
     agent {
         // this image provides everything needed to run Cypress
         docker {
-            image 'cypress/browsers:chrome67'
+            image 'cypress/browsers:node10.16.0-chrome76'
             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
         }
     }
@@ -14,6 +14,8 @@ pipeline {
             steps {
                 sh 'npm install --save-dev cypress'
                 //start tests execution
+                sh 'll'
+                sh 'pwd'
                 sh 'npm run cy:run -- -s "cypress/integration/*"'
             }
 
