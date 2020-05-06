@@ -12,10 +12,11 @@ pipeline {
 
 
             steps {
+                sh 'ls -al'
+                sh 'pwd'
                 sh 'npm install --save-dev cypress'
                 //start tests execution
-                sh 'll'
-                sh 'pwd'
+                
                 sh 'npm run cy:run -- -s "cypress/integration/*"'
             }
 
