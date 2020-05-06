@@ -15,7 +15,7 @@ pipeline {
                 
                 sh 'npm install --save-dev cypress'
                 //start tests execution
-                sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=DevLab'
+                sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host="DevLab"'
             }
 
             post {
