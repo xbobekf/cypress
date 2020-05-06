@@ -2,7 +2,7 @@ pipeline {
     agent {
         // this image provides everything needed to run Cypress
         docker {
-            image 'hub.docker.com/r/cypress/browsers:node12.4.0-chrome76'
+            image 'hub.docker.com/cypress/browsers:node12.4.0-chrome76'
             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
         }
     }
