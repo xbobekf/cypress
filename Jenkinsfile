@@ -2,7 +2,7 @@ pipeline {
     agent {
         // this image provides everything needed to run Cypress
         docker {
-            image 'https://hub.docker.com/r/cypress/base'
+            image 'cypress/base:latest'
             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
         }
     }
