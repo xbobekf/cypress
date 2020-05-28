@@ -43,6 +43,7 @@ pipeline {
                 always {
                     //junit 'results/cypress-report-*.xml'
                     //sh 'rm results/*'
+                    echo 'Build finished'
                 }
 
                 success {
