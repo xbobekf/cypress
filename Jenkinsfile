@@ -17,12 +17,31 @@ pipeline {
                 sh 'npm install --save-dev cypress'
                 //start tests execution
                 sh 'ls -al'
-                sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+            }            
+        }
+        stage('cypress parallel tests'){
+            parallel {
+                stage('tester A') {
+                    steps {
+                        sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+                    }
+                }
+                stage('tester B') {
+                    steps {
+                        sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+                    }
+                }
+                stage('tester C') {
+                    steps {
+                        sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+                    }
+                }
             }
-
-            post {
+        }
+    }
+    post {
                 always {
-                    junit 'results/cypress-report-*.xml'
+                    //junit 'results/cypress-report-*.xml'
                     //sh 'rm results/*'
                 }
 
@@ -50,6 +69,4 @@ pipeline {
                             recipientProviders: [developers()]
                 }
             }
-        }
-    }
 }
