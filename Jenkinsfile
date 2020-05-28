@@ -23,19 +23,15 @@ pipeline {
             parallel {
                 stage('tester A') {
                     steps {
-                        sh './node_modules/.bin/cypress run  -- -s "cypress/integration/*" --env host=TestLab'
+                        sh './node_modules/.bin/cypress run  -- -s "cypress/integration/kk.js" --env host=TestLab'
                     }
                 }
                 stage('tester B') {
                     steps {
-                        sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
+                        sh './node_modules/.bin/cypress run -- -s "cypress/integration/justlog.js" --env host=TestLab'
                     }
                 }
-                stage('tester C') {
-                    steps {
-                        sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
-                    }
-                }
+                
             }
         }
     }
