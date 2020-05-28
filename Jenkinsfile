@@ -23,17 +23,17 @@ pipeline {
             parallel {
                 stage('tester A') {
                     steps {
-                        sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+                        sh './node_modules/.bin/cypress run  -- -s "cypress/integration/*" --env host=TestLab'
                     }
                 }
                 stage('tester B') {
                     steps {
-                        sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+                        sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
                     }
                 }
                 stage('tester C') {
                     steps {
-                        sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
+                        sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
                     }
                 }
             }
