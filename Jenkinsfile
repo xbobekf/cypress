@@ -17,7 +17,7 @@ pipeline {
                 sh 'npm install --save-dev cypress'
                 //start tests execution
                 sh 'ls -al'
-                sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
+                sh './node_modules/.bin/cypress run --record --key 6446b39a-139c-41f7-bf56-af90a5dedbe5 --parallel -- -s "cypress/integration/*" --env host=TestLab'
             }
 
             post {
