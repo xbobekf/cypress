@@ -1,29 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'cypress/browsers:node12.4.0-chrome76'
-            label 'tester A'
-            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt -u root:sudo'
-        }
-        docker {
-            image 'cypress/browsers:node12.4.0-chrome76'
-            label 'tester B'
-            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt -u root:sudo'
-        }
-    }
-
+    agent none
     stages {
-        
         stage('cypress parallel tests'){
             parallel {
                 stage('tester A') {
                     agent {
                         label 'tester A'
-                        /*docker {
+                        docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
-                            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
-                            //sh 'npm install --save-dev cypress'
-                        }*/
+                            label 'tester A'
+                            //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                        }
                     }
                     steps {
                         sh 'npm install --save-dev cypress'
@@ -33,18 +20,17 @@ pipeline {
                 stage('tester B') {
                     agent {
                         label 'tester B'
-                        /*docker {
+                        docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
-                            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
-                            //sh 'npm install --save-dev cypress'
-                        }*/
+                            label 'tester B'
+                            //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                        }
                     }
                     steps {
                         sh 'npm install --save-dev cypress'
                         sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
                     }
                 }
-                
             }
         }
     }
