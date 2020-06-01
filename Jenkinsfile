@@ -2,32 +2,27 @@ pipeline {
     agent none
 
     stages {
-        //agent any
+        docker {
+            image 'cypress/browsers:node12.4.0-chrome76'
+            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+        }
         stage('cypress parallel tests'){
             parallel {
                 stage('tester A') {
-                    agent {
+                    /*agent {
                         //label 'tester A'
                         docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
                             //sh 'npm install --save-dev cypress'
                         }
-                    }
+                    }*/
                     steps {
                         sh 'npm install --save-dev cypress'
                         sh './node_modules/.bin/cypress run  -- -s "cypress/integration/*" --env host=DevLab'
                     }
                 }
                 stage('tester B') {
-                    agent {
-                        //label 'tester B'
-                        docker {
-                            image 'cypress/browsers:node12.4.0-chrome76'
-                            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
-                            //sh 'npm install --save-dev cypress'
-                        }
-                    }
                     steps {
                         sh 'npm install --save-dev cypress'
                         sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
