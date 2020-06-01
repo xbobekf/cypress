@@ -6,7 +6,7 @@ pipeline {
             parallel {
                 stage('tester A') {
                     agent {
-                        label 'tester X'
+                        
                         docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             label 'tester A'
@@ -20,7 +20,7 @@ pipeline {
                 }
                 stage('tester B') {
                     agent {
-                        label 'tester B'
+                        
                         docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             label 'tester B'
