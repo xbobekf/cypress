@@ -15,7 +15,7 @@ pipeline {
                         }
                     }
                     steps {
-                        //sh 'npm install --save-dev cypress'
+                        sh 'npm install --save-dev cypress'
                         sh './node_modules/.bin/cypress run  -- -s "cypress/integration/*" --env host=DevLab'
                     }
                 }
