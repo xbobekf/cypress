@@ -28,7 +28,6 @@ pipeline {
                         sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
                     }
                 }
-                
             }
         }
     }
