@@ -19,7 +19,5 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 before(function() {
-    if(Cypress.env('host') == undefined){
-        Cypress.env('host','TestLab')
-    }
+    
 })

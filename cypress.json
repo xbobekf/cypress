@@ -1,3 +1,7 @@
 {
-  "projectId": "4wevgq"
+  "projectId": "4wevgq",
+  "env": {
+    "host": "TestLab",
+    "some": "value"
+  }
 }
