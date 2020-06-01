@@ -1,5 +1,5 @@
 pipeline {
-    
+    agent any
     stages {
         stage('cypress parallel tests'){
             parallel {
