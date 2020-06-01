@@ -1,31 +1,33 @@
 pipeline {
     agent none
     stages {
-        stage('cypress parallel tests 1'){
-            agent {
-                docker {
-                    image 'cypress/browsers:node12.4.0-chrome76'
-                    args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+        parallel {
+            stage('cypress parallel tests 1'){
+                agent {
+                    docker {
+                        image 'cypress/browsers:node12.4.0-chrome76'
+                        args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                    }
+                }
+                stage('tester A') {
+                    steps {
+                        sh 'npm install --save-dev cypress'
+                        sh './node_modules/.bin/cypress run  -- -s "cypress/integration/*" --env host=TestLab'
+                    }
                 }
             }
-            stage('tester A') {
-                steps {
-                    sh 'npm install --save-dev cypress'
-                    sh './node_modules/.bin/cypress run  -- -s "cypress/integration/*" --env host=TestLab'
+            stage('cypress parallel tests 2'){
+                agent {
+                    docker {
+                        image 'cypress/browsers:node12.4.0-chrome76'
+                        args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                    }
                 }
-            }
-        }
-        stage('cypress parallel tests 2'){
-            agent {
-                docker {
-                    image 'cypress/browsers:node12.4.0-chrome76'
-                    args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
-                }
-            }
-            stage('tester B') {
-                steps {
-                    sh 'npm install --save-dev cypress'
-                    sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
+                stage('tester B') {
+                    steps {
+                        sh 'npm install --save-dev cypress'
+                        sh './node_modules/.bin/cypress run -- -s "cypress/integration/*" --env host=TestLab'
+                    }
                 }
             }
         }
