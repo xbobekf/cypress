@@ -5,9 +5,6 @@ pipeline {
             label 'tester A'
             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt -u root:sudo'
         }
-        
-    }
-    agent {
         docker {
             image 'cypress/browsers:node12.4.0-chrome76'
             label 'tester B'
