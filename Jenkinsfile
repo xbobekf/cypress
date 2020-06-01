@@ -10,7 +10,7 @@ pipeline {
                         docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             //label 'tester A'
-                            //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                            args  '-u root:sudo'
                         }
                     }
                     steps {
@@ -24,7 +24,7 @@ pipeline {
                         docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             //label 'tester B'
-                            //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                            args  '-u root:sudo'
                         }
                     }
                     steps {
