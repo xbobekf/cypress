@@ -1,6 +1,7 @@
 pipeline {
-    agent any
+    
     stages {
+        agent dockerfile
         stage('cypress parallel tests'){
             parallel {
                 stage('tester A') {
