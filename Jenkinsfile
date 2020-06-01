@@ -2,7 +2,11 @@ pipeline {
     agent {
             docker {
                 image 'cypress/browsers:node12.4.0-chrome76'
-                //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+                args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label="tester A" -u root:sudo'
+            }
+            docker {
+                image 'cypress/browsers:node12.4.0-chrome76'
+                args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label="tester B" -u root:sudo'
             }
         }
 
@@ -12,7 +16,7 @@ pipeline {
             parallel {
                 stage('tester A') {
                     agent {
-                        //label 'tester A'
+                        label 'tester A'
                         /*docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
@@ -26,7 +30,7 @@ pipeline {
                 }
                 stage('tester B') {
                     agent {
-                        //label 'tester B'
+                        label 'tester B'
                         /*docker {
                             image 'cypress/browsers:node12.4.0-chrome76'
                             args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
