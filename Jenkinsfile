@@ -2,9 +2,11 @@ pipeline {
     agent none
 
     stages {
-        docker {
-            image 'cypress/browsers:node12.4.0-chrome76'
-            //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+        agent{
+            docker {
+                image 'cypress/browsers:node12.4.0-chrome76'
+                //args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label=disable -u root:sudo'
+            }
         }
         stage('cypress parallel tests'){
             parallel {
