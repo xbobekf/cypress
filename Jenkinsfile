@@ -1,14 +1,17 @@
 pipeline {
     agent {
-            docker {
-                image 'cypress/browsers:node12.4.0-chrome76'
-                args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label="tester A" -u root:sudo'
-            }
-            docker {
-                image 'cypress/browsers:node12.4.0-chrome76'
-                args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label="tester B" -u root:sudo'
-            }
+        docker {
+            image 'cypress/browsers:node12.4.0-chrome76'
+            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label="tester A" -u root:sudo'
         }
+        
+    }
+    agent {
+        docker {
+            image 'cypress/browsers:node12.4.0-chrome76'
+            args  '-v /var/run/docker.sock:/var/run/docker.sock --security-opt label="tester B" -u root:sudo'
+        }
+    }
 
     stages {
         
