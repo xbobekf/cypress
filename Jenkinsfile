@@ -16,6 +16,7 @@ pipeline {
                     steps {
                         sh 'pwd'
                         sh 'ls -al'
+                        sh 'whoami'
                         sh 'npm install --save-dev cypress'
                         sh './node_modules/.bin/cypress run  --spec "cypress/integration/justlog.js" --env host=DevLab'
                     }
